@@ -108,9 +108,38 @@ abstract class Lenkeliste <E> implements Liste <E> {
 
         return retur;
 
+        public LenkelisteIterator Iterator() 
+    {
+        LenkelisteIterator l2 = new LenkelisteIterator();
+        return l2;
     }
 
+
+public class LenkelisteIterator implements Iterable <E>
+{
+
+    public LenkelisteIterator(){}
+
     
+    @Override
+    public Iterator<E> iterator() {
+        return null;
+    }
+
+    public boolean hasNext() {
+        
+        return false;
+    }
+
+    public E next() {
+        
+        return null;
+    }
+    
+}
 
 
 }
+
+    
+
