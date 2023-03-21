@@ -22,6 +22,11 @@ abstract class Legemiddel{
         return pris;
     }
 
+    public String hentNavn()
+    {
+        return navn;
+    }
+
     public void settNyPris(int nypris)
     {
         pris = nypris;

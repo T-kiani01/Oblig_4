@@ -1,10 +1,5 @@
 public class IndeksertListe <E> extends Lenkeliste<E> {
 
-    public IndeksertListe()
-    {
-        
-    }
-
     public void leggTil (int pos, E x) 
     { 
         //sjekker om indeksen er gyldig

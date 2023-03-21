@@ -1,8 +1,8 @@
 public class Pasient{
     String navn;
     String fodselnummer;
-    int pasientID;
-    static int nestePasientID = 1;
+    public int pasientID;
+    static int nestePasientID = 0;
     Stabel <Resept> resepter;
 
 
@@ -39,3 +39,4 @@ public class Pasient{
 
 
 }
+

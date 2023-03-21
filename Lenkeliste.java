@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 abstract class Lenkeliste <E> implements Liste <E> {
 
         //lager en klasse for Nodene som den lenkede listen består av.
@@ -108,7 +110,9 @@ abstract class Lenkeliste <E> implements Liste <E> {
 
         return retur;
 
-        public LenkelisteIterator Iterator() 
+    }
+
+    public LenkelisteIterator Iterator() 
     {
         LenkelisteIterator l2 = new LenkelisteIterator();
         return l2;
@@ -140,6 +144,3 @@ public class LenkelisteIterator implements Iterable <E>
 
 
 }
-
-    
-

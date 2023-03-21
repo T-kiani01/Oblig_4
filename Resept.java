@@ -1,16 +1,16 @@
 abstract class Resept {
     Legemiddel legemiddel;
     Lege utskrivendeLege;
-    Pasient pasientId;
+    Pasient pasient;
     int reit;
     int ID;
     static int IDnummer = 1;
 
-    public Resept(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient , int reit)
+    public Resept(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient, int reit)
     {
         this.legemiddel = legemiddel;
         this.utskrivendeLege = utskrivendeLege;
-        this.pasientId = pasient;
+        this.pasient = pasient;
         this.reit = reit;
         ID = IDnummer;
         IDnummer++;
@@ -33,7 +33,7 @@ abstract class Resept {
 
     public Pasient hentPasientId()
     {
-        return pasientId;
+        return pasient;
     }
 
     public int hentReit()

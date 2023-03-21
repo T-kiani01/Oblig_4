@@ -1,22 +1,23 @@
 class egentest {
 
-    public static void main(String[] args) {
-        IndeksertListe indeks = new IndeksertListe<>();
+    public static void main(String[] args) throws UlovligUtskrift {
+        Lege legen = new Lege("Temoor");
+        Pasient pasienten = new Pasient("Farid", "010197");
 
-        indeks.leggTil(27);
-        indeks.leggTil(50);
-        indeks.leggTil(104);
+        Narkotisk narko = new Narkotisk("fentanyl", 200, 150, 8);
+        Vanedannende vane = new Vanedannende("paracet", 100, 500, 8);
+        Vanlig vanlig = new Vanlig("Hostesaft" , 500, 25);
 
-        
-        System.out.println(indeks.toString());
+        Lege tor = new Lege("Tor");
+        Spesialist line = new Spesialist("Line", "346092");
 
-        indeks.fjern(1);
+        tor.skrivPResept(vanlig, pasienten, 5);
+        tor.skrivHvitResept(vanlig, pasienten, 0);
 
-        System.out.println(indeks.toString());
+        System.out.println(tor.utskrevneResepter.toString());
 
-        indeks.leggTil(1, 54);
-
-        System.out.println(indeks.toString());
+        line.skrivBlaaResept(narko, pasienten, 2);
+        tor.skrivBlaaResept(narko, pasienten, 2);
     }
 
     
