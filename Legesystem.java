@@ -4,19 +4,19 @@ import java.util.Scanner;
 
 public class Legesystem {
 
-    public IndeksertListe pasienter;
-    public IndeksertListe leger;
-    public IndeksertListe legemidler;
-    public IndeksertListe resepter;
+    public IndeksertListe<Pasient> pasienter;
+    public Prioritetskoe<Lege> leger;
+    public IndeksertListe<Legemiddel> legemidler;
+    public IndeksertListe<Resept> resepter;
 
     public Legesystem() {
-        pasienter = new IndeksertListe<Pasient>();
-        leger = new IndeksertListe<Lege>();
-        legemidler = new IndeksertListe<Legemiddel>();
-        resepter = new IndeksertListe<Resept>();
+        pasienter = new IndeksertListe<>();
+        leger = new Prioritetskoe<>();
+        legemidler = new IndeksertListe<>();
+        resepter = new IndeksertListe<>();
     }
 
-    public void lesFraFil(String filnavn) {
+    public void lesFraFil(String filnavn) throws UlovligUtskrift {
         try {
             Scanner fil = new Scanner(new File(filnavn));
             String linje = fil.nextLine();
@@ -48,7 +48,7 @@ public class Legesystem {
                     String type = legemiddelData[1];
                     int pris = Integer.parseInt(legemiddelData[2]);
                     double virkestoff = Double.parseDouble(legemiddelData[3]);
-                    
+
                     if (type.equals("vanlig")) {
                         Legemiddel legemiddel = new Vanlig(navn, pris, virkestoff);
                         legemidler.leggTil(legemiddel);
@@ -64,7 +64,7 @@ public class Legesystem {
                 }
             }
 
-            // Les inn leger
+                        // Les inn leger
             if (linje.equals("# Leger")) {
                 while (fil.hasNextLine()) {
                     linje = fil.nextLine();
@@ -82,46 +82,85 @@ public class Legesystem {
                         Spesialist spesialist = new Spesialist(navn, kontrollnr);
                         leger.leggTil(spesialist);
                     }
-                    }
-                    }
-                    
-                    // Les inn resepter
+                }
+            }
+
+            // Les inn resepter
             if (linje.equals("# Resepter")) {
                 while (fil.hasNextLine()) {
                     linje = fil.nextLine();
                     if (linje.startsWith("#")) {
                         break;
-                }
-                String[] reseptData = linje.split(",");
-                int legemiddelNummer = Integer.parseInt(reseptData[0]);
+                    }
+                    //lager en liste av elementene på linjen
+                    String[] reseptData = linje.split(",");
+                    //for å opprette resept må vi først ha legen, legemiddelet, og pasienten. 
+                    int legemiddelNummer = Integer.parseInt(reseptData[0]);
+                    Lege legeNavn = null;
+                    Pasient pasientObj = null;
 
-                //lager nytt legeobjekt
-                Lege legeNavn = new Lege(reseptData[1]);
-                
+                    //finner legen vår i listen med en for-løkke
+                    for (Lege lege : leger) {
+                        if (lege.hentNavn().equals(reseptData[1])) {
+                            legeNavn = lege;
+                            break;
+                        } else {
+                            legeNavn = new Lege(reseptData[1]);
+                        }
+                    }
 
-                int pasientID = Integer.parseInt(reseptData[2]);
-                String type = reseptData[3];
-                if (type.equals("blaa")) {
-                    int reit = Integer.parseInt(reseptData[4]);
-                    Resept blaaResept = new BlaaResept(null, legeNavn, pasientID, reit);
-                    resepter.leggTil(blaaResept);
-                } else if (type.equals("p")) {
-                    int reit = Integer.parseInt(reseptData[4]);
-                    Resept pResept = new PResept(null, legeNavn, pasientID, reit);
-                    resepter.leggTil(pResept);
-                } else if (type.equals("militaer")) {
-                    Resept militaerResept = new MilResept(null, legeNavn, pasientID);
-                    resepter.leggTil(militaerResept);
+                    //finner pasienten vår i pasient listen med en for løkke
+                    for (Pasient pasient : pasienter) {
+                        if (pasient.hentPasientID() == Integer.parseInt(reseptData[2])) {
+                            pasientObj = pasient;
+                            break;
+                        }
+                    }
+
+                    //finner legemiddelet i listen vår med en for-løkke
+                    Legemiddel legemiddel = null;
+                    for (Legemiddel l : legemidler) {
+                        if (l.hentId() == legemiddelNummer) {
+                            legemiddel = l;
+                            break;
+                        }
+                    }
+
+                    String type = reseptData[3];
+                    Resept resept = null;
+                    if (type.equals("hvit")) {
+                        int reit = Integer.parseInt(reseptData[4]);
+                        resept = legeNavn.skrivHvitResept(legemiddel, pasientObj, reit);
+                    } else if (type.equals("blaa")) {
+                        int reit = Integer.parseInt(reseptData[4]);
+                        resept = legeNavn.skrivBlaaResept(legemiddel, pasientObj, reit);
+                    } else if (type.equals("militaer")) {
+                        resept = legeNavn.skrivMilResept(legemiddel, pasientObj, 3);
+                    } else if (type.equals("p")) {
+                        int reit = Integer.parseInt(reseptData[4]);
+                        resept = legeNavn.skrivPResept(legemiddel, pasientObj, reit);
+                    }
+
+                    if (resept != null) {
+                        resepter.leggTil(resept);
+                        pasientObj.leggTilResept(resept);
+                    }
                 }
             }
+        }   catch (FileNotFoundException e) {
+            System.out.println("Feil: Finner ikke filen");
+            return;
         }
-
-        fil.close();
-    } catch (FileNotFoundException e) {
-        System.out.println("Finner ikke fil: " + filnavn);
     }
-}
-}
+}   
+    
 
-                    
-                    
+    
+        
+        
+
+
+
+
+
+

@@ -35,19 +35,19 @@ public class Lege implements Comparable<Lege> {
     }
 
     public HvitResept skrivHvitResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift {
-        if(!(this instanceof Godkjenningsfritak) && legemiddel instanceof Narkotisk)
+        if(legemiddel instanceof Narkotisk)
         { throw new UlovligUtskrift();}
 
-        HvitResept hvit = new HvitResept(legemiddel, this, pasient, reit);
+        HvitResept hvit = new HvitResept(legemiddel, this, pasient.pasientID, reit);
         utskrevneResepter.leggTil(hvit);
         return hvit;
     }
     
     public MilResept skrivMilResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift {
-        if(!(this instanceof Godkjenningsfritak) && legemiddel instanceof Narkotisk)
+        if(legemiddel instanceof Narkotisk)
         { throw new UlovligUtskrift();}
 
-        MilResept mil = new MilResept(legemiddel, this, pasient);
+        MilResept mil = new MilResept(legemiddel, this, pasient.pasientID);
         utskrevneResepter.leggTil(mil);
         return mil;
         
@@ -55,10 +55,10 @@ public class Lege implements Comparable<Lege> {
 
     public PResept skrivPResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift 
     {
-        if(!(this instanceof Godkjenningsfritak) && legemiddel instanceof Narkotisk)
+        if(legemiddel instanceof Narkotisk)
         { throw new UlovligUtskrift();}
 
-        PResept p = new PResept(legemiddel, this, pasient, reit);
+        PResept p = new PResept(legemiddel, this, pasient.pasientID, reit);
         utskrevneResepter.leggTil(p);
         return p;
     }
@@ -68,7 +68,7 @@ public class Lege implements Comparable<Lege> {
         if(!(this instanceof Godkjenningsfritak) && legemiddel instanceof Narkotisk)
         { throw new UlovligUtskrift();}
 
-        BlaaResept blaa = new BlaaResept(legemiddel, this, pasient, reit);
+        BlaaResept blaa = new BlaaResept(legemiddel, this, pasient.pasientID, reit);
         utskrevneResepter.leggTil(blaa);
         return blaa;
     }
