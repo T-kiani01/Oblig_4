@@ -34,6 +34,12 @@ public class Pasient{
         return resepter;
     }
 
+    @Override
+    public String toString() 
+    {
+        return navn;
+    }
+
 
     
 

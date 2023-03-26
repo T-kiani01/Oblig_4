@@ -4,13 +4,13 @@ abstract class Legemiddel{
     public final String navn;
     int pris;
     public final double virkestoff;
-    static int IDnummeret = 1;
+    static int IDnummeret = 0;
 
 
     public Legemiddel(String navn, int pris, double virkestoff)
     {   //Id som øker med 1 for hver gang et nytt Legemiddelobjekt opprettes
-        IDnr = IDnummeret;
         IDnummeret += 1;
+        IDnr = IDnummeret;
         this.navn = navn; 
         this.pris = pris;
         this.virkestoff = virkestoff;

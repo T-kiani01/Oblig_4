@@ -20,7 +20,7 @@ public class Lege implements Comparable<Lege> {
     }
 
     public String toString() {
-        return "Informasjon om Legen: Navn: " + navn;
+        return navn;
     }
 
     @Override
@@ -43,7 +43,9 @@ public class Lege implements Comparable<Lege> {
         return hvit;
     }
     
-    public MilResept skrivMilResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift {
+    public MilResept skrivMilResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift
+    {
+        
         if(legemiddel instanceof Narkotisk)
         { throw new UlovligUtskrift();}
 
@@ -55,6 +57,7 @@ public class Lege implements Comparable<Lege> {
 
     public PResept skrivPResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift 
     {
+        
         if(legemiddel instanceof Narkotisk)
         { throw new UlovligUtskrift();}
 
@@ -67,6 +70,7 @@ public class Lege implements Comparable<Lege> {
     {
         if(!(this instanceof Godkjenningsfritak) && legemiddel instanceof Narkotisk)
         { throw new UlovligUtskrift();}
+
 
         BlaaResept blaa = new BlaaResept(legemiddel, this, pasient.pasientID, reit);
         utskrevneResepter.leggTil(blaa);

@@ -17,18 +17,22 @@ public class Legesystem {
     }
 
     public void lesFraFil(String filnavn) throws UlovligUtskrift {
+        
         try {
+            
             Scanner fil = new Scanner(new File(filnavn));
             String linje = fil.nextLine();
-
+            
             // Les inn pasienter
-            if (linje.equals("# Pasienter")) {
+            if (linje.startsWith("# Pasienter")) {
+                
                 while (fil.hasNextLine()) {
                     linje = fil.nextLine();
                     if (linje.startsWith("#")) {
                         break;
                     }
                     String[] pasientData = linje.split(",");
+                    System.out.println(pasientData);
                     String navn = pasientData[0];
                     String fnr = pasientData[1];
                     Pasient pasient = new Pasient(navn, fnr);
@@ -37,7 +41,7 @@ public class Legesystem {
             }
 
             // Les inn legemidler
-            if (linje.equals("# Legemidler")) {
+            if (linje.startsWith("# Legemidler")) {
                 while (fil.hasNextLine()) {
                     linje = fil.nextLine();
                     if (linje.startsWith("#")) {
@@ -48,24 +52,28 @@ public class Legesystem {
                     String type = legemiddelData[1];
                     int pris = Integer.parseInt(legemiddelData[2]);
                     double virkestoff = Double.parseDouble(legemiddelData[3]);
+                    
 
                     if (type.equals("vanlig")) {
                         Legemiddel legemiddel = new Vanlig(navn, pris, virkestoff);
                         legemidler.leggTil(legemiddel);
+                        
                     } else if (type.equals("narkotisk")) {
                         int styrke = Integer.parseInt(legemiddelData[4]);
                         Legemiddel legemiddel = new Narkotisk(navn, pris, virkestoff, styrke);
                         legemidler.leggTil(legemiddel);
+                        
                     } else if (type.equals("vanedannende")) {
                         int styrke = Integer.parseInt(legemiddelData[4]);
                         Legemiddel legemiddel = new Vanedannende(navn, pris, virkestoff, styrke);
                         legemidler.leggTil(legemiddel);
+                        
                     }
                 }
             }
 
                         // Les inn leger
-            if (linje.equals("# Leger")) {
+            if (linje.startsWith("# Leger")) {
                 while (fil.hasNextLine()) {
                     linje = fil.nextLine();
                     if (linje.startsWith("#")) {
@@ -86,7 +94,9 @@ public class Legesystem {
             }
 
             // Les inn resepter
-            if (linje.equals("# Resepter")) {
+            if (linje.startsWith("# Resepter")) {
+                // skip header line
+                
                 while (fil.hasNextLine()) {
                     linje = fil.nextLine();
                     if (linje.startsWith("#")) {
@@ -128,15 +138,16 @@ public class Legesystem {
 
                     String type = reseptData[3];
                     Resept resept = null;
-                    if (type.equals("hvit")) {
+                    if (type.startsWith("hvit")) {
                         int reit = Integer.parseInt(reseptData[4]);
                         resept = legeNavn.skrivHvitResept(legemiddel, pasientObj, reit);
-                    } else if (type.equals("blaa")) {
+                    } else if (type.startsWith("blaa")) {
                         int reit = Integer.parseInt(reseptData[4]);
                         resept = legeNavn.skrivBlaaResept(legemiddel, pasientObj, reit);
-                    } else if (type.equals("militaer")) {
-                        resept = legeNavn.skrivMilResept(legemiddel, pasientObj, 3);
-                    } else if (type.equals("p")) {
+                    } else if (type.startsWith("militaer")) {
+                        int reit = 3;
+                        resept = legeNavn.skrivMilResept(legemiddel, pasientObj, reit);
+                    } else if (type.startsWith("p")) {
                         int reit = Integer.parseInt(reseptData[4]);
                         resept = legeNavn.skrivPResept(legemiddel, pasientObj, reit);
                     }
@@ -152,6 +163,42 @@ public class Legesystem {
             return;
         }
     }
+
+    //E3: Implementer funksjonalitet for å skrive ut en ryddig oversikt om alle elementer i
+    //legesystemet. Leger skal skrives ut i ordnet rekkefølge.
+
+    public void skrivOversikt()
+    {   System.out.println("Her er en oversikt av hele systemet!");
+        System.out.println("PASIENTENE i systemet er disse:");
+
+        for(Pasient p : pasienter)
+        {
+            System.out.println(p);
+        }
+
+        System.out.println("LEGENE(A-Z) i systemet er disse:");
+
+        for(Lege l : leger)
+        {
+            System.out.println(l);
+        }
+
+        System.out.println("Under er hvert LEGEMIDDEL i systemet");
+
+        for(Legemiddel middel : legemidler)
+        {
+            System.out.println(middel);
+        }
+        
+        System.out.println("her er alle RESEPTER i systemet");
+        
+        for(Resept r: resepter)
+        {
+            System.out.println(r);
+        }
+
+    }
+
 }   
     
 

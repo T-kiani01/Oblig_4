@@ -1,16 +1,16 @@
 abstract class Resept {
     Legemiddel legemiddel;
     Lege utskrivendeLege;
-    Pasient pasient;
+    int pasientid;
     int reit;
     int ID;
     static int IDnummer = 1;
 
-    public Resept(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient, int reit)
+    public Resept(Legemiddel legemiddel, Lege utskrivendeLege, int pasientid, int reit)
     {
         this.legemiddel = legemiddel;
         this.utskrivendeLege = utskrivendeLege;
-        this.pasient = pasient;
+        this.pasientid = pasientid;
         this.reit = reit;
         ID = IDnummer;
         IDnummer++;
@@ -31,9 +31,9 @@ abstract class Resept {
         return utskrivendeLege;
     }
 
-    public Pasient hentPasientId()
+    public int hentPasientId()
     {
-        return pasient;
+        return pasientid;
     }
 
     public int hentReit()
@@ -50,6 +50,13 @@ abstract class Resept {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String toString()
+    {
+    String legemiddelNavn = legemiddel.navn;
+    return "ReseptID: " + ID + ". Legemiddelet er: " + legemiddelNavn + " Utskrivende lege er: " + utskrivendeLege.navn + " og pasienten den skrives ut til har IDnummer: " + pasientid + "Reit gjenværende er " + reit ;
     }
 
     abstract public String farge();
