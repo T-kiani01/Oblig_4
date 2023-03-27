@@ -30,7 +30,7 @@ public class Pasient{
         resepter.leggTil(resept);
     }
 
-    public Lenkeliste<Resept> hentResepter() {
+    public Stabel<Resept> hentResepter() {
         return resepter;
     }
 

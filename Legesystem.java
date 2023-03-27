@@ -165,7 +165,7 @@ public class Legesystem {
         }
     }
 
-
+    //spør bruker om input, og printer ut oversikten over de elementene bruker velger
     public void skrivOversikt()
     {   
         int inp;
@@ -371,13 +371,13 @@ public class Legesystem {
             Pasient valgtPasient= null;
             Legemiddel valgtLegemiddel = null;
 
-            System.out.println("Hvilken Lege ønsker du å skrive ut en resepet fra");
+            System.out.println("Hvilken Lege onsker du å skrive ut en resept fra");
             for(int i = 0; i < leger.storrelse;i++)
             {
                 System.out.println(i + "." + leger.hent(i).navn);
             }
             int legenr = scanner.nextInt();
-            if(legenr > leger.storrelse)
+            if(legenr < 0 || legenr > leger.storrelse)
             {System.out.println("Ugyldig Lege");}
             else
             { valgtLege = leger.hent(legenr);}
@@ -394,7 +394,9 @@ public class Legesystem {
             if(pasientnr > pasienter.storrelse)
             {System.out.println("Ugyldig Pasient");}
             else
-            {valgtPasient = pasienter.hent(pasientnr);}
+            {
+                valgtPasient = pasienter.hent(pasientnr);
+            }
 
 
 
@@ -421,18 +423,26 @@ public class Legesystem {
             if (resepttype.equals("hvit")) {
 
                 resepter.leggTil(valgtLege.skrivHvitResept(valgtLegemiddel , valgtPasient, nyreit));
+                valgtPasient.leggTilResept(valgtLege.skrivHvitResept(valgtLegemiddel , valgtPasient, nyreit));
+
                 System.out.println("Resepten har blitt lagt til!");
             } else if (resepttype.equals("blaa")) {
                 
                 resepter.leggTil(valgtLege.skrivBlaaResept(valgtLegemiddel , valgtPasient, nyreit));
+                valgtPasient.leggTilResept(valgtLege.skrivHvitResept(valgtLegemiddel , valgtPasient, nyreit));
+
                 System.out.println("Resepten har blitt lagt til!");
             } else if (resepttype.equals("militaer")) {
                 
                 resepter.leggTil(valgtLege.skrivMilResept(valgtLegemiddel , valgtPasient, nyreit));
+                valgtPasient.leggTilResept(valgtLege.skrivHvitResept(valgtLegemiddel , valgtPasient, nyreit));
+
                 System.out.println("Resepten har blitt lagt til!");
             } else if (resepttype.equals("p")) {
                
                 resepter.leggTil(valgtLege.skrivPResept(valgtLegemiddel , valgtPasient, nyreit));
+                valgtPasient.leggTilResept(valgtLege.skrivHvitResept(valgtLegemiddel , valgtPasient, nyreit));
+
                 System.out.println("Resepten har blitt lagt til!");
             }
 

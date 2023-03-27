@@ -13,6 +13,7 @@ public class Narkotisk extends Legemiddel {
         return "Narkotisk Legemiddel. ID: " + IDnr + ". Navn: " + navn + ". Pris: " + pris + " kr. Virkestoff: " + virkestoff + " mg. Styrke: " + styrke;
     }
 
+    @Override
     public String type()
     {
         return "narkotisk";

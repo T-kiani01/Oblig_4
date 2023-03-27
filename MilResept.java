@@ -11,4 +11,9 @@ public class MilResept extends HvitResept {
         return 0;
     }
 
+    @Override
+    public String farge() {
+        return "militaer";
+    }
+
 }

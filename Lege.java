@@ -34,6 +34,7 @@ public class Lege implements Comparable<Lege> {
         return utskrevneResepter;
     }
 
+    //Vi tar inn de respektive parameterne i hver metode, lager resepten, legger den til i legens liste av utskrevne, og returnerer resepten
     public HvitResept skrivHvitResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift {
         if(legemiddel instanceof Narkotisk)
         { throw new UlovligUtskrift();}
@@ -66,6 +67,7 @@ public class Lege implements Comparable<Lege> {
         return p;
     }
 
+    //Ingen har lov å skrive ut narkotiske resepter, utenom spesialister som skriver ut blåresept. 
     public BlaaResept skrivBlaaResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift
     {
         if(!(this instanceof Godkjenningsfritak) && legemiddel instanceof Narkotisk)

@@ -5,6 +5,7 @@ public class Vanlig extends Legemiddel {
         //TODO Auto-generated constructor stub
     }
 
+    @Override
     public String type()
     {
         return "vanlig";

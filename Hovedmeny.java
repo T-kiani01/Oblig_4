@@ -17,12 +17,14 @@ class Hovedmeny {
     public static void menyen(Legesystem hoved) {
         int input;
         Scanner scan = new Scanner(System.in);
+        System.out.println("");
         System.out.println("1: Skrive ut valgfri oversikt av ulike elementer i systemet.");
         System.out.println("2: Opprett et nytt element og legg det til i systemet");
         System.out.println("3: Bruke en resept for en gitt pasient");
         System.out.println("4: Skriv ut diverse statistikk om systemet");
         System.out.println("5: Skrive alle data til ny fil");
         System.out.println("6: for aa avslutte programmet :(");
+        System.out.println("");
 
         input = scan.nextInt();
         if (input == 1) {
@@ -39,7 +41,7 @@ class Hovedmeny {
             hoved.brukresept();
             menyen(hoved);
         } else if (input == 4) {
-            //hoved.skrivStatistikk();
+            hoved.statistikk();
             menyen(hoved);
         } else if (input == 5) {
             //hoved.skrivTilFil();
@@ -48,7 +50,7 @@ class Hovedmeny {
             System.out.println("Programmet avsluttes.");
             System.exit(0);
         } else {
-            System.out.println("Ugyldig input. Prøv igjen.");
+            System.out.println("Ugyldig input. Prov igjen.");
             menyen(hoved);
         }
     }

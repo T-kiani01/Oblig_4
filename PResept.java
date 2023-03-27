@@ -15,5 +15,12 @@ public int prisAaBetale() {
         }
     }
 
+    @Override
+    public String farge() {
+        return "P";
+    }
+
+
+
 
 }

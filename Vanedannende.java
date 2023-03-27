@@ -13,6 +13,7 @@ public class Vanedannende extends Legemiddel {
         return "Vanedannende Legemiddel. ID: " + IDnr + ". Navn: " + navn + ". Pris: " + pris + " kr. Virkestoff: " + virkestoff + " mg. Styrke: " + styrke;
     }
 
+    @Override
     public String type()
     {
         return "vanedannende";

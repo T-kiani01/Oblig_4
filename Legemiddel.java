@@ -45,5 +45,10 @@ abstract class Legemiddel{
     public String toString() {
         return "Informasjon om Legemiddelet. ID: " + IDnr + ". Navn: " + navn + ". Pris: " + pris + " kr. Virkestoff: " + virkestoff + " mg.";
     }
+
+    public String type()
+    {
+        return null;
+    }
     
 }
