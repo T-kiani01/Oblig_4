@@ -56,7 +56,7 @@ abstract class Resept {
     public String toString()
     {
     String legemiddelNavn = legemiddel.navn;
-    return "ReseptID: " + ID + ". Legemiddelet er: " + legemiddelNavn + " Utskrivende lege er: " + utskrivendeLege.navn + " og pasienten den skrives ut til har IDnummer: " + pasientid + "Reit gjenværende er " + reit ;
+    return "ReseptID: " + ID + ". Legemiddelet er: " + legemiddelNavn + ". Utskrivende lege er: " + utskrivendeLege.navn + " og pasienten den skrives ut til har pasientID: " + pasientid + ". REIT: " + reit ;
     }
 
     abstract public String farge();

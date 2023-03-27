@@ -7,7 +7,7 @@ class egentest {
     sys.skrivOversikt();
 
     
-        
+    sys.brukresept();
 
     }
 

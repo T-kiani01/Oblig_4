@@ -196,6 +196,34 @@ public class Legesystem {
         {
             System.out.println(r);
         }
+    }
+
+    public void brukresept()
+    
+    {
+        int pasientnr;
+        int reseptnr;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("hvilken pasient onsker du aa se resepter for(Tast NR)");
+        for(int i = 0; i < pasienter.storrelse; i++)
+        {
+            System.out.println(i + ". " + pasienter.hent(i).navn);
+        }
+        pasientnr = scan.nextInt();
+
+        Pasient pasienten = pasienter.hent(pasientnr);
+        System.out.println("Velg den resepten du ønsker å bruke(Tast NR)");
+        for(int y = 0; y < pasienten.resepter.storrelse; y++)
+        {
+            System.out.println(y + ". " + pasienten.resepter.hent(y));
+        }
+        reseptnr = scan.nextInt();
+         if(pasienten.resepter.hent(reseptnr).bruk() == true){
+        System.out.println("Du har brukt et reit av denne resepten, det er naa " + pasienten.resepter.hent(reseptnr).hentReit() + " Reit gjenvaerende." );
+        } else {
+            System.out.println("Kunne ikke bruke resept paa Paracet (ingen gjenvaerende reit).");
+        }
+
 
     }
 

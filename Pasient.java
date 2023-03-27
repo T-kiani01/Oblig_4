@@ -2,8 +2,8 @@ public class Pasient{
     String navn;
     String fodselnummer;
     public int pasientID;
-    static int nestePasientID = 0;
-    Stabel <Resept> resepter;
+    static int nestePasientID = 1;
+    public Stabel <Resept> resepter;
 
 
     public Pasient (String navn, String fodselnummer){
