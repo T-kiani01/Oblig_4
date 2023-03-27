@@ -445,7 +445,73 @@ public class Legesystem {
 
             }
         }
+    
+    public void statistikk()
+        {   
+
+            System.out.println("Leger med Narkotisk Resepter");
+            int teller = 0;
+            for(Lege lege : leger)
+            {  
+                if(lege instanceof Godkjenningsfritak)
+                {
+                    IndeksertListe<Resept> Reseptliste = lege.hentReseptliste();
+                    for(Resept resept : Reseptliste)
+                    {
+                        Legemiddel legemiddel = resept.hentReseptLegemiddel();
+                        if(legemiddel.type == "narkotisk")
+                        {teller++;}
+                    }
+                    if(teller > 0)
+                    {
+                        System.out.println("Lege navn:"+ lege.hentNavn() + "Antall av Narkotisk resepter :"+ teller);
+                    }
+                }
+                
+            }
+
+
+            System.out.println("Pasienter med Narkotisk Resepter");
+            int pteller = 0;
+            for(Pasient pasient : pasienter)
+            {  
+                    IndeksertListe<Resept> Reseptliste = pasient.hentResepter();
+                    for(Resept resept : Reseptliste)
+                    {
+                        Legemiddel legemiddel = resept.hentReseptLegemiddel();
+                        if(legemiddel.type == "narkotisk")
+                        {pteller++;}
+                    }
+                    if(pteller > 0)
+                    {
+                        System.out.println("Pasient navn:"+ pasient.hentNavn() + "Antall av Narkotisk resepter :"+ pteller);
+                    }
+                
+                
+            }
+            int nteller = 0;
+            for(Resept resept : Resepter)
+                    {
+                        Legemiddel legemiddel = resept.hentReseptLegemiddel();
+                        if(legemiddel.type == "narkotisk")
+                        {nteller++;}
+                    }
+                    System.out.println("Antall av Narkotisk resepter :"+ nteller);
+            
+            int vteller = 0;
+            for(Resept resept : Resepter)
+                    {
+                        Legemiddel legemiddel = resept.hentReseptLegemiddel();
+                        if(legemiddel.type == "vanedannende")
+                        {vteller++;}
+                    }
+                    System.out.println("Antall av Vanedannende resepter :"+ vteller);
+
+            
+        }
     }
+
+
     
 
 
