@@ -521,6 +521,53 @@ public class Legesystem {
 
         
     }
+
+
+    public void skrivTilFil() throws IOException {
+
+    
+        File file = new File ("Systemo.txt");
+        FileWriter fw = new FileWriter(file);
+        PrintWriter pw = new PrintWriter(fw);
+
+        pw.println("#Pasienter (navn, fnr)");
+        for(Pasient pasient: pasienter){
+
+            pw.println(pasient.hentNavn() + ", " + pasient.hentFødselsnummer() );
+        }
+        
+        pw.println("# Legemidler (navn,type,pris,virkestoff,[styrke]");
+        for(Legemiddel legemid: legemidler){
+            pw.println(legemid.hentNavn() + ", " + legemid.type() + ", " + legemid.hentPris() + "," + legemid.hentVirkestoff());
+
+        }
+
+        // Predizol,narkotisk,450,75,8
+        pw.println("# Leger (navn,kontrollid / 0 hvis vanlig lege)");
+
+        for(Lege lege : leger){
+            if(lege instanceof Godkjenningsfritak){
+                pw.println(lege.hentNavn() + ", " + lege.hentKontrollkode());
+            }
+            else{
+                pw.println(lege.hentNavn() + ", 0 ");
+
+
+        }
+        }
+
+        pw.println("# Resepter (legemiddelNummer,legeNavn,pasientID,type,[reit])");
+
+        for (Resept resp : resepter){
+            pw.println(resp.hentReseptLegemiddel().hentId() + ", " + resp.hentlege().hentNavn() + ", " + resp.pasientid + ", " + resp.farge() + ", " + resp.hentReit());
+
+        }
+        
+        // 1,Dr. Cox,2,hvit,7
+
+
+        pw.close();
+}
         
     }
     
