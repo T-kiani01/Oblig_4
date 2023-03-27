@@ -79,7 +79,10 @@ public class Lege implements Comparable<Lege> {
         return blaa;
     }
 
+public String hentKontrollkode (){
+        return null;
 
+    }
 
 
 }
