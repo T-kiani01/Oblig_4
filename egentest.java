@@ -8,7 +8,7 @@ class egentest {
 
     
 
-    sys.leggTill();
+    
 
 
     }

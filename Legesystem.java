@@ -167,34 +167,53 @@ public class Legesystem {
 
 
     public void skrivOversikt()
-    {   System.out.println("Her er en oversikt av hele systemet!");
+    {   
+        int inp;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Hva onsker du aa se hele oversikten for?(1-4)\n 1: Pasient \n 2: Leger \n 3: Legemidler\n 4: Resepter");
+        inp = scan.nextInt();
+
+        if(inp == 1){
         System.out.println("PASIENTENE i systemet er disse:");
 
         for(Pasient p : pasienter)
         {
             System.out.println(p);
+            System.out.println("");
+        }
         }
 
+        else if(inp == 2){
         System.out.println("LEGENE(A-Z) i systemet er disse:");
 
         for(Lege l : leger)
         {
             System.out.println(l);
+            System.out.println("");
+        }
         }
 
+        else if(inp == 3){
         System.out.println("Under er hvert LEGEMIDDEL i systemet");
 
         for(Legemiddel middel : legemidler)
         {
             System.out.println(middel);
+            System.out.println("");
         }
-        
+        }
+
+        else if (inp == 4) {
         System.out.println("her er alle RESEPTER i systemet");
         
         for(Resept r: resepter)
         {
             System.out.println(r);
+            System.out.println("");
         }
+    } else {
+        System.out.println("Ugyldig input");
+    }
     }
 
     public void brukresept()
@@ -207,6 +226,7 @@ public class Legesystem {
         for(int i = 0; i < pasienter.storrelse; i++)
         {
             System.out.println(i + ". " + pasienter.hent(i).navn);
+            System.out.println("");
         }
         pasientnr = scan.nextInt();
 
@@ -215,16 +235,18 @@ public class Legesystem {
         for(int y = 0; y < pasienten.resepter.storrelse; y++)
         {
             System.out.println(y + ". " + pasienten.resepter.hent(y));
+            System.out.println("");
         }
         reseptnr = scan.nextInt();
          if(pasienten.resepter.hent(reseptnr).bruk() == true){
         System.out.println("Du har brukt et reit av denne resepten, det er naa " + pasienten.resepter.hent(reseptnr).hentReit() + " Reit gjenvaerende." );
         } else {
             System.out.println("Kunne ikke bruke resept, (ingen gjenvaerende reit)."); 
+            System.out.println("");
         }
     }
 
-        public void leggTill() throws UlovligUtskrift
+        public void leggTil() throws UlovligUtskrift
     {   
         System.out.println("Hva onsker du å legge til?(Tast 1-4)");
         System.out.println("1.Lege");
@@ -272,7 +294,7 @@ public class Legesystem {
         leger.leggTil(new Spesialist(nylegenavn, nykontrollID));
         System.out.println("Legen " + nylegenavn + " er lagt til i systemet.");}
         
-        else if (svar == "ja")
+        else if (svar.equalsIgnoreCase("nei"))
         {
         // Sjekker om legen allerede finnes
         for (Lege lege : leger) {
@@ -366,6 +388,7 @@ public class Legesystem {
             for(int i = 0; i < pasienter.storrelse;i++)
             {
                 System.out.println(i + "." + pasienter.hent(i).navn);
+                System.out.println("");
             }
             int pasientnr = scanner.nextInt();
             if(pasientnr > pasienter.storrelse)
@@ -379,6 +402,7 @@ public class Legesystem {
             for(int i = 0; i < legemidler.storrelse;i++)
             {
                 System.out.println(i + "." + legemidler.hent(i).navn);
+                System.out.println("");
             }
             int legemidelnr = scanner.nextInt();
             scanner.nextLine(); 

@@ -4,5 +4,10 @@ public class Vanlig extends Legemiddel {
         super(navn, pris, virkestoff);
         //TODO Auto-generated constructor stub
     }
+
+    public String type()
+    {
+        return "vanlig";
+    }
     
 }

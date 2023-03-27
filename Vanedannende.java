@@ -12,5 +12,10 @@ public class Vanedannende extends Legemiddel {
     public String toString() {
         return "Vanedannende Legemiddel. ID: " + IDnr + ". Navn: " + navn + ". Pris: " + pris + " kr. Virkestoff: " + virkestoff + " mg. Styrke: " + styrke;
     }
+
+    public String type()
+    {
+        return "vanedannende";
+    }
     
-}
+}   
